@@ -1,19 +1,8 @@
-with source as (
-
-    select * from {{ source('northwind_data', 'categories') }}
-
-),
-
-renamed as (
-
-    select
-        category_id::integer            as category_id,
-        category_name::varchar(255)     as category_name,
-        --	,description
-        --	,picture
-
-    from source
-
+WITH source_data AS (
+    SELECT *
+    FROM {{ source('northwind_data', 'categories') }}
 )
-
-select * from renamed
+SELECT
+    category_id
+    ,category_name
+FROM source_data
